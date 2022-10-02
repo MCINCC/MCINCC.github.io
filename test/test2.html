@@ -1,0 +1,153 @@
+    <section>
+
+        <div id="message"> </div>
+
+        <div class="input">
+
+            <textarea name="" id="txt" cols="30" rows="10" value="" placeholder="留下足迹吧"></textarea>
+
+            <input type="button" value="留言">
+
+        </div>
+
+    </section>
+
+<script>
+  
+  /* 获取登录账户 */
+
+ let user = sessionStorage.getItem("name");
+
+ /* 获取页面元素 */
+
+ const btn = document.querySelector('[value="留言"]');
+
+ let str = '', time;
+
+ // let arr = [];
+
+ let index = 0;
+
+ 
+
+ /* 点击留言 */
+
+ btn.addEventListener('click', function () {
+
+     /* 设置id */
+
+     let arr1 = JSON.parse(localStorage.getItem('comment'));
+
+     if (arr1 instanceof Array && arr1.length) {//判断此时的是不是数组且是否有长度
+
+         index = arr1[arr1.length - 1].id + 1;
+
+     } else {
+
+         arr1=[];
+
+         index = 1;
+
+     }
+
+ 
+
+     str = txt.value;
+
+     if (str) {
+
+         time = date();
+
+         let obj = {
+
+             id: index,
+
+             "time": time,
+
+             "name": user,
+
+             "content": str
+
+         }
+
+         arr1.push(obj);
+
+         // let arr1 = JSON.parse(localStorage.getItem('comment'));
+
+         // arr1.push(obj);
+
+         /* 本地存储 */
+
+         localStorage.setItem('comment', JSON.stringify(arr1));
+
+         render();
+
+         txt.value = '';
+
+     }
+
+ })
+
+ 
+
+ 
+
+ /* 点击删除 */
+
+ message.addEventListener('click', function (event) {
+
+     if (event.target.innerText == '删除') {
+
+         let id = event.target.dataset.id;
+
+         let arr1 = JSON.parse(localStorage.getItem('comment'));
+
+         let result = arr1.filter(item => item.id != id);
+
+         localStorage.setItem('comment', JSON.stringify(result));
+
+         render() 
+
+     }
+
+ })
+
+ 
+
+ /* 渲染函数 */
+
+ function render() {
+
+     message.innerHTML='';
+
+     /* 获取本地存储 */
+
+     let arr1 = JSON.parse(localStorage.getItem('comment'));
+
+     for (let item of arr1) {
+
+         let div = document.createElement(`div`);
+
+         div.innerHTML = ` <div class='top'><span>${item.name}</span> <span>${item.time}</span></div>`;
+
+         div.innerHTML += ` <div class='top'><span>${item.content}</span> <button data-id=${item.id} >删除</button></div>`;
+
+         message.appendChild(div);
+
+     }
+
+ }
+
+ render();
+
+ /* 获取时间 */
+
+ function date() {
+
+     let myDate = new Date()
+
+     return `${myDate.toLocaleDateString()} ${mytime = myDate.toLocaleTimeString()}`
+
+ }
+
+ </script>
