@@ -26,7 +26,7 @@ String repassword = new String(request.getParameter("repassword").getBytes("ISO-
 
 try {
 
-BufferedWriter bw = new BufferedWriter(new FileWriter("G:/coding/eclipse-workspace/first/save.txt",true));
+BufferedWriter bw = new BufferedWriter(new FileWriter("save.txt",true));
 
 //FileWriter(File file, boolean append) ，append为true是接⼊⽂件尾，append为false时则会覆盖
 
