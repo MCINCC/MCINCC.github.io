@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<title>我的⽹页</title>
+
+</head>
+
+<body>
+
+<h2>浏览器窗体获得焦点则停⽌标题闪烁通知+失去焦点则开启标题闪烁通知</h2>
+
+<script>
+
+//窗体失焦的时候，标题就会闪。
+
+//这⾥有⼀个⼩的知识点，就是浏览器窗体获得焦点和失去焦点，Chrome和FireFox浏览器是window的onfocus, onblur⽅法；⽽IE浏览器则是document的onf ocusin, onfocusout⽅法，因此有：
+
+var titleInit = document.title,
+
+isShine =true;
+
+setInterval(function(){
+
+var title = document.title;
+
+if(isShine ==true){
+
+if(/新/.test(title)==false){
+
+document.title ='【你有新消息】';
+
+}else{
+
+document.title ='【    　】';
+
+}
+
+}else{
+
+document.title = titleInit;
+
+}
+
+},500);
+
+/
+
+/ for Chrome and FireFox
+
+window.onfocus=function(){
+
+isShine =false;
+
+};
+
+window.onblur=function(){
+
+isShine =true;
+
+};
+
+// for IE
+
+document.onfocusin=function(){
+
+isShine =false;
+
+};
+
+document.onfocusout=function(){
+
+isShine =true;
+
+};
+
+</script>
+
+<script>
+
+//实现右侧弹出消息通知
+
+window.onload=function(){
+
+suportNotify()
+
+}
+
+//判断浏览器是否⽀持Web Notifications API
+
+function suportNotify(){
+
+if(window.Notification){
+
+// ⽀持
+
+console.log("⽀持"+"Web Notifications API");
+
+//如果⽀持Web Notifications API，再判断浏览器是否⽀持弹出实例
+
+showMess()
+
+}else{
+
+// 不⽀持
+
+alert("不⽀持 Web Notifications API");
+
+}
+
+}
+
+//判断浏览器是否⽀持弹出实例
+
+function showMess(){
+
+setTimeout(function(){
+
+console.log('1：'+ Notification.permission);
+
+//如果⽀持window.Notification 并且许可不是拒绝状态
+
+if(window.Notification && Notification.permission !=="denied"){
+
+//Notification.requestPermission这是⼀个静态⽅法，作⽤就是让浏览器出现是否允许通知的提⽰
+
+Notification.requestPermission(function(status){
+
+console.log('2: '+ status);
+
+//如果状态是同意
+
+if(status ==="granted"){
+
+var m =new Notification('收到信息',{
+
+body:'这⾥是通知内容！你想看什么客官？',//消息体内容
+
+icon:"https://img1.baidu.com/it/u=3041604093,3909442121&fm=26&fmt=auto&gp=0.jpg"//消息图⽚});
+
+m.onclick=function(){//点击当前消息提⽰框后，跳转到当前页⾯
+
+window.focus();
+
+}
+
+}else{
+
+alert('当前浏览器不⽀持弹出消息')
+
+}
+
+});
+
+}
+
+},1000)
+
+}
+
+</script>
+
+</body>
+
+</html>
