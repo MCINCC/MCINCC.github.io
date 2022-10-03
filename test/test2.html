@@ -119,7 +119,8 @@
 
      if (event.target.innerText == '发布') {
 
-         let id = event.target.dataset.id;
+         let let id = event.target.dataset.id;
+id = event.target.dataset.id;
 
          let arr1 = JSON.parse(localStorage.getItem('comment'));
 
@@ -152,6 +153,8 @@
 
          div.innerHTML += ` <div class='top'><span>${item.content}</span> <button data-id=${item.id} >删除</button></div>`;
 
+         div.innerHTML += ` <div class='top'><span>${item.content}</span> <button data-id=${item.id} >发布</button></div>`;
+         
          message.appendChild(div);
 
      }
