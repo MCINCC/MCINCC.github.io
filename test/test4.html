@@ -1,0 +1,51 @@
+<button class="button">Hello</button>
+
+<script type="text/javascript">
+
+var button = document.querySelector('.button')
+
+button.addEventListener('click', function() {
+
+if (!("Notification" in window)) {
+
+alert("不⽀持 notification");
+
+} else if (Notification.permission === "granted") { // 允许通知
+
+notice()
+
+}else if (Notification.permission !== 'denied') { // ⽤户没有选择是否显⽰通知，向⽤户请求许可
+
+Notification.requestPermission(function(permission) {
+
+if (permission === "granted") {
+
+notice()
+
+}
+
+});
+
+}
+
+}, false)
+
+function notice() {
+
+var notification = new Notification("你好，JavaScript",{
+
+body:'微信订阅号',
+
+icon:"https://mp.weixin.qq.com/misc/getheadimg?token=990524500&fakeid=3006291623&r=674680"
+
+});
+
+notification.onclick = function(){
+
+notification.close()
+
+}
+
+}
+
+</script>
