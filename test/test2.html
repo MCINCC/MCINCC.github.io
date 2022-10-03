@@ -113,6 +113,26 @@
  })
 
  
+  /* 点击发布 */
+
+ message.addEventListener('click', function (event) {
+
+     if (event.target.innerText == '发布') {
+
+         let id = event.target.dataset.id;
+
+         let arr1 = JSON.parse(localStorage.getItem('comment'));
+
+         let result = arr1.filter(item => item.id != id);
+
+         localStorage.setItem('comment', JSON.stringify(result));
+
+         render() 
+
+     }
+
+ }) 
+    
 
  /* 渲染函数 */
 
