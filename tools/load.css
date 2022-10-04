@@ -1,0 +1,25 @@
+body {
+  background:#4ea980;
+  margin:50px;
+}
+
+.loader {
+  text-indent: -9999em;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  box-shadow: inset 0 0 0 15px #FFF;
+  border-radius: 50%;
+}
+
+.loader::before {
+  position: absolute;
+  content: '';
+  width: 100px;
+  height: 200px;
+  background: #4ea980;
+  border-radius: 0 200px 200px 0;
+  left: 100px;
+  transform-origin: 0px 100px;
+  animation: load-effect 2s infinite linear;
+}
