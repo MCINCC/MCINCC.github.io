@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>⽂字闪烁</title>
+
+</head>
+
+<body>
+
+<span id="blink"><b>奇葩天地⽹</b></span>
+
+<script type = "text/javascript" >
+
+function blinklink(){
+
+if(!document.getElementById('blink').style.color){
+
+document.getElementById('blink').style.color ="red";
+
+}
+
+if(document.getElementById('blink').style.color =="red"){
+
+document.getElementById('blink').style.color ="#FFFFFF";
+
+}else{
+
+document.getElementById('blink').style.color ="red";
+
+}
+
+timer =setTimeout("blinklink()",500);
+
+}
+
+function stoptimer(){
+
+clearTimeout(timer);
+
+}
+
+blinklink()
+
+</script>
+
+</body>
+
+</html>
