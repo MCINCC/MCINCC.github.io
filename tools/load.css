@@ -18,7 +18,7 @@ body {
   content: '';
   width: 100px;
   height: 200px;
-  background: #4ea980;
+  background: #000000;
   border-radius: 0 200px 200px 0;
   left: 100px;
   transform-origin: 0px 100px;
