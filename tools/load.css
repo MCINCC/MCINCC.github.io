@@ -23,3 +23,12 @@ body {
   transform-origin: 0px 100px;
   animation: load-effect 2s infinite linear;
 }
+.loader::after {
+position: absolute;
+content: '';
+width: 200px;
+height: 200px;
+border-radius: 50%;
+left: 0;
+box-shadow: inset 0 0 0 15px rgba(255,255,255,.2);
+}
